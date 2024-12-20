@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
   // Svelte'in onMount fonksiyonu, komponent yüklendikten sonra çalışacak kodu tanımlar
   import { onMount } from "svelte";
 
   // Durum değişkenleri tanımlanıyor
   let showAstra = true; // Başlangıçta A.S.T.R.A. animasyonu görünsün
-  //  { sender: string; text: string }[]
-  let messages = []; // Kullanıcı ve asistan mesajlarını saklamak için boş bir dizi
+  let messages: { sender: string; text: string }[] = []; // Kullanıcı ve asistan mesajlarını saklamak için boş bir dizi
   let userInput = ""; // Kullanıcının yazdığı metin için boş bir değer
 
   // A.S.T.R.A. animasyonunun 2 saniye sonra kaybolmasını sağlıyoruz

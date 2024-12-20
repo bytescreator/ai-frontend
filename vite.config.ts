@@ -1,10 +1,11 @@
 import { sveltekit } from "@sveltejs/kit/vite";
-import electron from "vite-plugin-electron/simple";
 import { defineConfig } from "vite";
+import electron from "vite-plugin-electron/simple";
 
 export default defineConfig({
   plugins: [
     sveltekit(),
+    // @ts-expect-error seems like our tsconfig can't catch this, does work in practice
     electron({
       main: {
         // Shortcut of `build.lib.entry`
