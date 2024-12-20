@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow } from "electron";
 import serve from "electron-serve";
 
 const loadURL = serve({ directory: "build", file: "app" });
@@ -12,8 +12,8 @@ function createWindow() {
     backgroundColor: "#00000000", // Arka planı tamamen şeffaf yap
     webPreferences: {
       contextIsolation: true,
-      nodeIntegration: false,
-    },
+      nodeIntegration: false
+    }
   });
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -27,13 +27,13 @@ function createWindow() {
 
 app.whenReady().then(createWindow);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
