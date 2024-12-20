@@ -1,3 +1,167 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Ortak Değerler */
+:root {
+    --container-width: 500px; /* Ortak genişlik */
+    --container-height: 500px; /* Ortak yükseklik */
+  }
+  
+  /* Ortak Stiller */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    overflow: hidden; /* Sayfanın genelinde scroll bar'ı engeller */
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--container-width); /* Ortak genişlik */
+    height: var(--container-height); /* Ortak yükseklik */
+    font-family: "Orbitron", sans-serif;
+    background: radial-gradient(circle, #0d0d0d 0%, #000000 100%);
+    color: #00ffe0;
+    border-radius: 10px;
+    overflow: hidden; /* İçerikte scroll bar'ı engeller */
+  }
+  
+  /* A.S.T.R.A. Yazısı ve Altındaki Hareketli Çizgi */
+  .astra-title {
+    font-size: 3rem; /* Font büyüklüğünü artırdık */
+    color: #00ffe0; /* A.S.T.R.A. başlığının rengi */
+    text-shadow: 0 0 20px #00ffe0; /* Yazıya ışıma efekti */
+    position: relative; /* Çizgiyi yazının altında konumlandırabilmek için */
+    animation: moveLine 2s infinite;
+    
+  }
+  
+  .astra-title::after {
+    content: ""; /* Boş içerik, çizgi oluşturmak için */
+    position: absolute;
+    bottom: -0.2rem; /* Yazının hemen altına yerleştir */
+    left: 0px; /* Çizginin sol başlangıç noktası */
+    width: 100%; /* Çizgi, yazının 20px solundan başlayıp 20px sağında bitmeli */
+    height: 2px; /* Çizginin yüksekliği */
+    background: #00ffe0; /* Sol taraf parlak, sağ taraf soluk */
+    animation: lineGlow 1.5s infinite alternate; /* Çizginin hareket süresi */
+    
+    box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0; /* Kuyruklu yıldız etkisi için parlama */
+  }
+  
+  
+  @keyframes moveLine {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 24%, 55% {
+        opacity: 0.4;
+      }
+    }
+
+
+  @keyframes lineGlow {
+    0% {
+      width: 0%;
+      opacity: 0.6;
+    }
+    100% {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  
+  
+  /* Asistan Arayüzü */
+  .assistant-container {
+    width: var(--container-width); /* Ortak genişlik */
+    height: var(--container-height); /* Ortak yükseklik */
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 10px 0 20px 0px #00ffe0, 0px 10px 20px 0px #00ffe0, -10px 0 20px 0px #00ffe0, 0px -10px 20px 0px #00ffe0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow: hidden; /* İçerikte scroll bar'ı engeller */
+  }
+  
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+  
+  .message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .message.user {
+    background: #00ffe0;
+    color: #000;
+    align-self: flex-end;
+  }
+  
+  .message.assistant {
+    background: #333;
+    color: #00ffe0;
+    align-self: flex-start;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background: #00ffe0;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #00d1b8;
+  }
+  
+  /* Mikrofon Butonu */
+  .microphone-button {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    background: #00ffe0;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00ffe0;
+    transition: background 0.3s;
+  }
+  
+  .microphone-button:hover {
+    background: #00d1b8;
+  }
+  
+  .microphone-icon {
+    font-size: 1.5rem;
+    color: #000;
+  }
+  
