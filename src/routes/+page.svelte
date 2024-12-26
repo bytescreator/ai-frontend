@@ -56,22 +56,12 @@
           placeholder="Bir şey yazın..."
           on:keydown={(e) => e.key === "Enter" && sendMessage()}
         />
-       <button on:click={sendMessage}>
-  <img src="/send.png" alt="Gönder" width="30" height="30"/>
-</button>
+        <button class="send-button" on:click={sendMessage}>
+          <img src="/send.png" alt="Gönder" />
+        </button>
 
-        
         <button class="microphone-button" on:click={startVoiceInput}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="microphone-icon"
-          >
-            <path
-              d="M12 15c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3s-3 1.35-3 3v6c0 1.65 1.35 3 3 3zm4.5-3c0 2.48-2.02 4.5-4.5 4.5S7.5 14.48 7.5 12H6c0 3.05 2.2 5.58 5.07 6.26V21h1.86v-2.74c2.87-.68 5.07-3.2 5.07-6.26h-1.5z"
-            />
-          </svg>
+          <img src="/microphone.png" alt="Mikrofon" width="40" height="40" />
         </button>
       </div>
     </div>
@@ -160,25 +150,36 @@
     outline: none;
   }
 
-  button {
-    margin-left: 10px;
-    padding: 10px 15px;
+  .send-button {
+    width: 38px;
+    height: 38px;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #00ffe0;
     border: none;
-    color: #000;
-    font-weight: bold;
-    border-radius: 5px;
     cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease;
   }
 
-  button:hover {
+  .send-button:hover {
     background: #00d1b8;
+    transform: scale(1.1);
+  }
+
+  .send-button img {
+    width: 70%;
+    height: 70%;
   }
 
   .microphone-button {
     margin-left: 10px;
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     background: #00ffe0;
     border: none;
     border-radius: 50%;
@@ -186,7 +187,6 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 0 10px #00ffe0;
     transition:
       transform 0.3s ease,
       background 0.3s ease;
