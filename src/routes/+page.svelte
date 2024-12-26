@@ -56,7 +56,11 @@
           placeholder="Bir şey yazın..."
           on:keydown={(e) => e.key === "Enter" && sendMessage()}
         />
-        <button on:click={sendMessage}>Gönder</button>
+       <button on:click={sendMessage}>
+  <img src="/send.png" alt="Gönder" width="30" height="30"/>
+</button>
+
+        
         <button class="microphone-button" on:click={startVoiceInput}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
