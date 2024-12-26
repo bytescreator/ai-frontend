@@ -1,12 +1,8 @@
-import { app, dialog } from "electron";
-import { createRequire } from "module";
+import { app, dialog, ipcMain } from "electron";
 import nd from "ndjson";
 import { spawn } from "node:child_process";
-const require = createRequire(import.meta.url);
-const ipcRenderer = require("electron/renderer").ipcRenderer;
-const ipcMain = require("electron/main").ipcMain;
 
-export function bindCallbacks() {
+export function bindCallbacks(win: Electron.BrowserWindow) {
   const handle = spawn("python.exe", ["main.py"], { cwd: "./backend" });
   handle.on("error", (e) => {
     dialog.showErrorBox("alt islem baslatilamadi", `alt islem baslatilamadi: ${e}`);
@@ -14,10 +10,19 @@ export function bindCallbacks() {
   });
   const serializer = nd.stringify();
   serializer.on("data", (line) => {
+    console.debug("sending line to sub", line);
     handle.stdin.write(line);
   });
+  handle.on("exit", (code, signal) => {
+    console.debug("subprocess exit", code, signal);
+  });
   handle.on("close", () => {
+    console.debug("close event received from handle");
     serializer.end();
+    app.quit();
+  });
+  handle.stderr.on("data", (v) => {
+    process.stderr.write(v);
   });
 
   // TODO: stdin write
@@ -38,19 +43,20 @@ export function bindCallbacks() {
   });
 
   handle.stdout.pipe(nd.parse()).on("data", (obj) => {
+    console.debug("obj received", obj);
     switch (obj.action) {
       case "on-llm-response":
-        ipcRenderer.send("on-llm-response", obj.text);
+        win.webContents.send("on-llm-response", obj.text);
       case "on-sound-input":
-        ipcRenderer.send("on-sound-input", obj.text);
+        win.webContents.send("on-sound-input", obj.text);
       case "on-voice-toggle":
-        ipcRenderer.send("on-voice-toggle", obj.status);
+        win.webContents.send("on-voice-toggle", obj.status);
       case "sound-devices-list":
-        ipcRenderer.send("sound-devices-list", obj.devices);
+        win.webContents.send("sound-devices-list", obj.devices);
       case "selected-sound-input":
-        ipcRenderer.send("selected-sound-input", obj.ok, obj.device);
+        win.webContents.send("selected-sound-input", obj.ok, obj.device);
       case "selected-sound-output":
-        ipcRenderer.send("selected-sound-output", obj.ok, obj.device);
+        win.webContents.send("selected-sound-output", obj.ok, obj.device);
     }
   });
 }

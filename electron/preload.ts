@@ -1,7 +1,4 @@
-import { contextBridge } from "electron";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const ipcRenderer = require("electron/renderer").ipcRenderer;
+import { contextBridge, ipcRenderer } from "electron";
 
 export const astra = {
   /**

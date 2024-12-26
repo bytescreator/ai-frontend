@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   let showAstra = true; // Başlangıçta A.S.T.R.A. animasyonu görünsün
-  let messages: { sender: string; text: string }[] = []; // Mesajları saklamak için
+  let messages: { sender: "assistant" | "user"; text: string }[] = []; // Mesajları saklamak için
   let userInput = ""; // Kullanıcı girdisi
   let isExpanded = false; // Genişletme/Daraltma durumunu kontrol eden değişken
 
@@ -10,15 +10,17 @@
     setTimeout(() => {
       showAstra = false;
     }, 2000); // 2 saniye sonra animasyonu gizle
+    window.astra.onResponse((text) => {
+      messages.push({ sender: "assistant", text });
+      setTimeout(scrollToBottom, 0);
+      messages = messages;
+    });
   });
 
   function sendMessage() {
     if (userInput.trim()) {
       messages = [...messages, { sender: "user", text: userInput }];
-      messages = [
-        ...messages,
-        { sender: "assistant", text: "Bu, örnek bir yapay zeka yanıtıdır." }
-      ];
+      window.astra.submitText(userInput);
       userInput = "";
       setTimeout(scrollToBottom, 0);
     }

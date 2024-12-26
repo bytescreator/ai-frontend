@@ -23,7 +23,7 @@ function createWindow() {
     }
   });
 
-  win.webContents.openDevTools()
+  win.webContents.openDevTools();
 
   if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL);
@@ -32,6 +32,8 @@ function createWindow() {
   }
 
   win.setMenuBarVisibility(false); // Menü çubuğunu gizle
+
+  bindCallbacks(win);
 }
 
 app.whenReady().then(createWindow);
@@ -47,5 +49,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-bindCallbacks();
