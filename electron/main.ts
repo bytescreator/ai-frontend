@@ -7,7 +7,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 500,
     height: 500,
-    frame: false, // Çerçevesiz pencere
+    frame: true, // Çerçevesiz pencere
     transparent: true, // Şeffaf pencere
     backgroundColor: "#00000000", // Arka planı tamamen şeffaf yap
     webPreferences: {

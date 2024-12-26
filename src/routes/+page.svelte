@@ -28,15 +28,6 @@
     alert("Sesli giriş başlatıldı!");
   }
 
-  function toggleExpand() {
-    const container = document.querySelector(".container");
-    isExpanded = !isExpanded; // Genişletme/Daraltma durumu değiştiriliyor
-    if (isExpanded) {
-      container?.requestFullscreen(); // Tam ekran modu
-    } else {
-      document.exitFullscreen(); // Tam ekranı kapat
-    }
-  }
   function scrollToBottom() {
     const messages = document.querySelector(".messages")?.children;
     if (!messages || !messages.length) return;
@@ -47,11 +38,6 @@
 </script>
 
 <div class="container {isExpanded ? 'expanded' : ''}">
-  {#if !showAstra}
-    <button class="expand-button" on:click={toggleExpand}>
-      {isExpanded ? "v" : "^"}
-    </button>
-  {/if}
   {#if showAstra}
     <div class="astra-title">A.S.T.R.A.</div>
   {:else}
@@ -114,25 +100,6 @@
   .container.expanded {
     width: 100vw;
     height: 100vh;
-  }
-
-  .expand-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    color: #00ffe0;
-    border: none;
-    padding: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    transition: color 0.3s ease;
-  }
-
-  .expand-button:hover {
-    color: #00d1b8;
   }
 
   .astra-title {
