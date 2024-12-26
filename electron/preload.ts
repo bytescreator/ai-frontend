@@ -57,6 +57,16 @@ export const astra = {
   },
 
   /**
+   * called when sound toggle responds
+   * @param cb to be called when sound is toggled
+   */
+  onVoiceToggle: (cb: (s: boolean) => void) => {
+    ipcRenderer.on("on-voice-toggle", (_, s) => {
+      cb(s);
+    });
+  },
+
+  /**
    * listens for sound device list calls initiated by requestSoundDevices
    * @param cb callback to call with devices
    */

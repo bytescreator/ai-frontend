@@ -43,6 +43,8 @@ export function bindCallbacks() {
         ipcRenderer.send("on-llm-response", obj.text);
       case "on-sound-input":
         ipcRenderer.send("on-sound-input", obj.text);
+      case "on-voice-toggle":
+        ipcRenderer.send("on-voice-toggle", obj.status);
       case "sound-devices-list":
         ipcRenderer.send("sound-devices-list", obj.devices);
       case "selected-sound-input":
