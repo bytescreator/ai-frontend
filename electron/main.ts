@@ -2,6 +2,7 @@ import { app, BrowserWindow } from "electron";
 import serve from "electron-serve";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { bindCallbacks } from "./subIpc";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,3 +47,5 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+bindCallbacks();
