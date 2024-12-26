@@ -1,7 +1,9 @@
 /* Ortak Değerler */
 :root {
-  --container-width: 500px; /* Ortak genişlik */
-  --container-height: 500px; /* Ortak yükseklik */
+  --container-width: 500px;
+  /* Ortak genişlik */
+  --container-height: 500px;
+  /* Ortak yükseklik */
 }
 
 /* Ortak Stiller */
@@ -14,79 +16,90 @@
 body,
 html {
   height: 100%;
-  overflow: hidden; /* Sayfanın genelinde scroll bar'ı engeller */
+  overflow: hidden;
+  /* Sayfanın genelinde scroll bar'ı engeller */
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--container-width); /* Ortak genişlik */
-  height: var(--container-height); /* Ortak yükseklik */
+  width: var(--container-width);
+  /* Ortak genişlik */
+  height: var(--container-height);
+  /* Ortak yükseklik */
   font-family: "Orbitron", sans-serif;
   background: radial-gradient(circle, #0d0d0d 0%, #000000 100%);
   color: #00ffe0;
   border-radius: 10px;
-  overflow: hidden; /* İçerikte scroll bar'ı engeller */
+  overflow: hidden;
+  /* İçerikte scroll bar'ı engeller */
 }
 
 /* A.S.T.R.A. Yazısı ve Altındaki Hareketli Çizgi */
 .astra-title {
-  font-size: 3rem; /* Font büyüklüğünü artırdık */
-  color: #00ffe0; /* A.S.T.R.A. başlığının rengi */
-  text-shadow: 0 0 20px #00ffe0; /* Yazıya ışıma efekti */
-  position: relative; /* Çizgiyi yazının altında konumlandırabilmek için */
+  font-size: 3rem;
+  /* Font büyüklüğünü artırdık */
+  color: #00ffe0;
+  /* A.S.T.R.A. başlığının rengi */
+  text-shadow: 0 0 20px #00ffe0;
+  /* Yazıya ışıma efekti */
+  position: relative;
+  /* Çizgiyi yazının altında konumlandırabilmek için */
   animation: moveLine 2s infinite;
+
 }
 
 .astra-title::after {
-  content: ""; /* Boş içerik, çizgi oluşturmak için */
+  content: "";
+  /* Boş içerik, çizgi oluşturmak için */
   position: absolute;
-  bottom: -0.2rem; /* Yazının hemen altına yerleştir */
-  left: 0px; /* Çizginin sol başlangıç noktası */
-  width: 100%; /* Çizgi, yazının 20px solundan başlayıp 20px sağında bitmeli */
-  height: 2px; /* Çizginin yüksekliği */
-  background: #00ffe0; /* Sol taraf parlak, sağ taraf soluk */
-  animation: lineGlow 1.5s infinite alternate; /* Çizginin hareket süresi */
-
-  box-shadow:
-    0 0 10px #00ffe0,
-    0 0 20px #00ffe0; /* Kuyruklu yıldız etkisi için parlama */
+  bottom: -0.2rem;
+  /* Yazının hemen altına yerleştir */
+  left: 60px;
+  /* Çizginin sol başlangıç noktası */
+  width: 40%;
+  height: 2px;
+  /* Çizginin yüksekliği */
+  background: #00ffe0;
+  /* Sol taraf parlak, sağ taraf soluk */
+  animation: slide 2s infinite, glowEffect 1.5s infinite alternate;
+  /* Çizginin hareket süresi */
+  box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+  /* Kuyruklu yıldız etkisi için parlama */
 }
 
-@keyframes moveLine {
-  0%,
-  19%,
-  21%,
-  23%,
-  25%,
-  54%,
-  56%,
-  100% {
-    opacity: 1;
-  }
-  20%,
-  24%,
-  55% {
-    opacity: 0.4;
-  }
-}
 
-@keyframes lineGlow {
+@keyframes slide {
   0% {
-    width: 0%;
-    opacity: 0.6;
+    transform: translateX(-100%);
   }
+
+  50% {
+    transform: translateX(100%);
+  }
+
   100% {
-    width: 100%;
-    opacity: 1;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes glowEffect {
+  0% {
+    box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+  }
+
+  100% {
+    box-shadow: 0 0 20px #00d1b8, 0 0 40px #00d1b8;
   }
 }
 
 /* Asistan Arayüzü */
 .assistant-container {
-  width: var(--container-width); /* Ortak genişlik */
-  height: var(--container-height); /* Ortak yükseklik */
+  width: var(--container-width);
+  /* Ortak genişlik */
+  height: var(--container-height);
+  /* Ortak yükseklik */
   background: #1e1e1e;
   border-radius: 10px;
   box-shadow:
@@ -97,19 +110,21 @@ html {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow: hidden; /* İçerikte scroll bar'ı engeller */
-}
-
-.messages {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 10px;
+  overflow: hidden;
+  /* İçerikte scroll bar'ı engeller */
 }
 
 .message {
   margin: 10px 0;
+  /* Mesajlar arasında dikey boşluk */
   padding: 10px;
   border-radius: 5px;
+  background: #00ffe0;
+  color: #000;
+  display: block;
+  /* Her mesaj kutusu alt alta gelir */
+  width: fit-content;
+  /* Mesajın genişliği içeriğe göre ayarlanır */
 }
 
 .message.user {
@@ -175,4 +190,44 @@ button:hover {
 .microphone-icon {
   font-size: 1.5rem;
   color: #000;
+}
+
+/* Asistan Arayüzü Scroll Bar Özelleştirme */
+.assistant-container .messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+
+  /* Scroll bar'ın genel görünümünü ayarlıyoruz */
+  scrollbar-width: thin;
+  /* Firefox için ince scroll bar */
+  scrollbar-color: #00ffe0 #1e1e1e;
+  /* Scroll bar'ın rengi (yol + alt zemin) */
+}
+
+/* Webkit tabanlı tarayıcılar (Chrome, Safari, Edge) için scroll bar özelleştirme */
+.assistant-container .messages::-webkit-scrollbar {
+  width: 8px;
+  /* Scroll bar'ın genişliği */
+}
+
+.assistant-container .messages::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  /* Scroll bar'ın arka plan rengi */
+  border-radius: 5px;
+  /* Köşeleri yuvarlat */
+}
+
+.assistant-container .messages::-webkit-scrollbar-thumb {
+  background-color: #00ffe0;
+  /* Scroll bar'ın rengi */
+  border-radius: 5px;
+  /* Köşeleri yuvarlat */
+  border: 2px solid #1e1e1e;
+  /* Scroll bar'ın etrafına ince kenarlık */
+}
+
+.assistant-container .messages::-webkit-scrollbar-thumb:hover {
+  background-color: #00d1b8;
+  /* Scroll bar üzerine gelindiğinde rengi değiştir */
 }
