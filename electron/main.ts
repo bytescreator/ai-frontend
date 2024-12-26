@@ -1,5 +1,10 @@
 import { app, BrowserWindow } from "electron";
 import serve from "electron-serve";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const loadURL = serve({ directory: "build", file: "app" });
 
@@ -12,7 +17,8 @@ function createWindow() {
     backgroundColor: "#00000000", // Arka planı tamamen şeffaf yap
     webPreferences: {
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      preload: path.join(__dirname, "preload.mjs")
     }
   });
 
