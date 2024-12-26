@@ -1,0 +1,3 @@
+[submodule "ai-backend"]
+	path = backend
+	url = git@github.com:bytescreator/ai-backend
