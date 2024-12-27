@@ -50,6 +50,8 @@ export function bindCallbacks(win: Electron.BrowserWindow) {
   handle.stdout.pipe(nd.parse()).on("data", (obj) => {
     console.debug("obj received", obj);
     switch (obj.action) {
+      case "input-ready":
+        win.webContents.send("input-ready");
       case "on-llm-response":
         win.webContents.send("on-llm-response", obj.text);
       case "on-sound-input":

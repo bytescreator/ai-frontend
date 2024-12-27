@@ -7,9 +7,9 @@
   let isExpanded = false; // Genişletme/Daraltma durumunu kontrol eden değişken
 
   onMount(() => {
-    setTimeout(() => {
+    window.astra.readyPromise.then(() => {
       showAstra = false;
-    }, 2000); // 2 saniye sonra animasyonu gizle
+    });
     window.astra.onResponse((text) => {
       messages.push({ sender: "assistant", text });
       setTimeout(scrollToBottom, 0);

@@ -42,6 +42,13 @@ export const astra = {
   },
 
   /**
+   * resolves when input-ready is received
+   */
+  readyPromise: new Promise<void>((resolve) => {
+    ipcRenderer.on("input-ready", () => resolve());
+  }),
+
+  /**
    * calls cb when voice is disabled or after voice has been spoken
    * @param cb callback to call when a textual response has been received
    */
