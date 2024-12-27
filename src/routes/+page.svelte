@@ -37,6 +37,31 @@
     console.log(elem);
     elem.scrollIntoView();
   }
+  function rewrite() {
+    // Mesajları içeren kapsayıcıyı seç
+    const messagesContainer = document.querySelector(".messages");
+
+    // Kapsayıcıyı ve mesajları kontrol et
+    if (!messagesContainer) {
+      console.log("Mesaj kapsayıcı bulunamadı.");
+      return;
+    }
+
+    const messages = messagesContainer.children;
+
+    window.astra.rewindMessage();
+
+    // Son iki mesajı sil
+    for (let i = 0; i < 2; i++) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage) {
+        messagesContainer.removeChild(lastMessage);
+      } else {
+        console.log("Silinecek mesaj kalmadı.");
+        break;
+      }
+    }
+  }
 </script>
 
 <div class="container {isExpanded ? 'expanded' : ''}">
@@ -52,6 +77,9 @@
         {/each}
       </div>
       <div class="input-container">
+        <button class="pencil-button" on:click={rewrite}>
+          <img src="/pencil.png" alt="Yeniden Yaz" />
+        </button>
         <input
           type="text"
           bind:value={userInput}
@@ -105,6 +133,7 @@
   }
 
   .assistant-container {
+    margin-right: 5px;
     width: 90%;
     height: 80%;
     background: #1e1e1e;
@@ -153,6 +182,7 @@
   }
 
   .send-button {
+    margin-left: 5px;
     width: 38px;
     height: 38px;
     padding: 5px;
@@ -179,7 +209,7 @@
   }
 
   .microphone-button {
-    margin-left: 10px;
+    margin-left: 5px;
     width: 38px;
     height: 38px;
     background: #00ffe0;
@@ -203,5 +233,31 @@
     width: 24px;
     height: 24px;
     color: #000;
+  }
+  .pencil-button {
+    margin-right: 5px;
+    width: 38px;
+    height: 38px;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00ffe0;
+    border: none;
+    cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .pencil-button:hover {
+    background: #00d1b8;
+    transform: scale(1.1);
+  }
+
+  .pencil-button img {
+    width: 70%;
+    height: 70%;
   }
 </style>

@@ -16,8 +16,8 @@
 body,
 html {
   height: 100%;
+  background-color: black;
   overflow: hidden;
-  /* Sayfanın genelinde scroll bar'ı engeller */
 }
 
 .container {
