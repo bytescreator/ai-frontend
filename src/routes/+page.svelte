@@ -49,7 +49,7 @@
 
     const messages = messagesContainer.children;
 
-    // Son mesajı ve onun cevabını bul
+    // Son kullanıcı mesajını ve ona ait cevabını bul
     const lastUserMessage = Array.from(messages)
       .reverse()
       .find((message) => message.classList.contains("user"));
@@ -62,11 +62,14 @@
       // Kullanıcı mesajını input alanına yaz
       userInput = lastUserMessage.textContent?.trim() || "";
 
-      window.astra.rewindMessage();
-
       // Son kullanıcı mesajını ve onun cevabını sil
       messagesContainer.removeChild(lastUserMessage);
       messagesContainer.removeChild(lastAssistantMessage);
+
+      // Asistanın mesaj geçmişini geri al (rewindMessage)
+      window.astra.rewindMessage();
+    } else {
+      console.log("Son kullanıcı mesajı veya asistan cevabı bulunamadı.");
     }
   }
 </script>
