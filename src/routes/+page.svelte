@@ -155,7 +155,7 @@
 
   .message {
     min-width: 0;
-    max-width: 85%;
+    max-width: 600px;
     word-break: break-word;
     white-space: pre-wrap;
     margin: 10px 0;
