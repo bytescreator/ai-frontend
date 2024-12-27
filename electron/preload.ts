@@ -8,6 +8,20 @@ export const astra = {
   submitText: (text: string) => ipcRenderer.send("submit-text", text),
 
   /**
+   * resets the chat session, all messages must be cleared
+   */
+  newSession: () => {
+    ipcRenderer.send("new-session");
+  },
+
+  /**
+   * rewinds the last message pair
+   */
+  rewindMessage: () => {
+    ipcRenderer.send("rewind-session");
+  },
+
+  /**
    * submits a listening request to backend
    */
   toggleVoice: (status: boolean) => ipcRenderer.send("toggle-listen", status),

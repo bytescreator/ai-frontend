@@ -25,9 +25,14 @@ export function bindCallbacks(win: Electron.BrowserWindow) {
     process.stderr.write(v);
   });
 
-  // TODO: stdin write
   ipcMain.on("submit-text", (_, text) => {
     serializer.write({ action: "submit-text", text });
+  });
+  ipcMain.on("new-session", () => {
+    serializer.write({ action: "new-session" });
+  });
+  ipcMain.on("rewind-session", () => {
+    serializer.write({ action: "rewind-session" });
   });
   ipcMain.on("toggle-listen", (_, status) => {
     serializer.write({ action: "toggle-listen", status });
