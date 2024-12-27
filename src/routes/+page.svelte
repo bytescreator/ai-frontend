@@ -183,6 +183,7 @@
   input[type="text"] {
     flex: 1;
     padding: 10px;
+    height: 38px;
     border: none;
     border-radius: 5px;
     outline: none;
