@@ -49,17 +49,24 @@
 
     const messages = messagesContainer.children;
 
-    window.astra.rewindMessage();
+    // Son mesajı ve onun cevabını bul
+    const lastUserMessage = Array.from(messages)
+      .reverse()
+      .find((message) => message.classList.contains("user"));
+    const lastAssistantMessage = Array.from(messages)
+      .reverse()
+      .find((message) => message.classList.contains("assistant"));
 
-    // Son iki mesajı sil
-    for (let i = 0; i < 2; i++) {
-      const lastMessage = messages[messages.length - 1];
-      if (lastMessage) {
-        messagesContainer.removeChild(lastMessage);
-      } else {
-        console.log("Silinecek mesaj kalmadı.");
-        break;
-      }
+    // Eğer son bir kullanıcı mesajı ve ona ait bir asistan cevabı varsa
+    if (lastUserMessage && lastAssistantMessage) {
+      // Kullanıcı mesajını input alanına yaz
+      userInput = lastUserMessage.textContent?.trim() || "";
+
+      window.astra.rewindMessage();
+
+      // Son kullanıcı mesajını ve onun cevabını sil
+      messagesContainer.removeChild(lastUserMessage);
+      messagesContainer.removeChild(lastAssistantMessage);
     }
   }
 </script>
