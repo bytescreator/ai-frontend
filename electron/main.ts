@@ -11,8 +11,8 @@ const loadURL = serve({ directory: "build", file: "app" });
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 500,
-    height: 500,
+    minWidth: 500,
+    minHeight: 500,
     resizable: true,
     webPreferences: {
       contextIsolation: true,

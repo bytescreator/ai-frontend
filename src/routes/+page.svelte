@@ -4,7 +4,6 @@
   let showAstra = true; // Başlangıçta A.S.T.R.A. animasyonu görünsün
   let messages: { sender: "assistant" | "user"; text: string }[] = []; // Mesajları saklamak için
   let userInput = ""; // Kullanıcı girdisi
-  let isExpanded = false; // Genişletme/Daraltma durumunu kontrol eden değişken
 
   onMount(() => {
     window.astra.readyPromise.then(() => {
@@ -74,16 +73,16 @@
   }
 </script>
 
-<div class="container {isExpanded ? 'expanded' : ''}">
+<div class="container">
   {#if showAstra}
     <div class="astra-title">A.S.T.R.A.</div>
   {:else}
     <div class="assistant-container">
       <div class="messages">
         {#each messages as message}
-          <div class="message {message.sender}">
+          <p class="message {message.sender}">
             {message.text}
-          </div>
+          </p>
         {/each}
       </div>
       <div class="input-container">
@@ -122,18 +121,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: var(--container-width);
-    height: var(--container-height);
+    min-width: var(--container-width);
+    min-height: var(--container-height);
+    width: 100%;
+    height: 100%;
     background: radial-gradient(circle, #0d0d0d 0%, #000000 100%);
     color: #00ffe0;
     border-radius: 10px;
-    overflow: hidden;
     transition: all 0.3s ease-in-out;
-  }
-
-  .container.expanded {
-    width: 100vw;
-    height: 100vh;
   }
 
   .astra-title {
@@ -143,24 +138,26 @@
   }
 
   .assistant-container {
-    margin-right: 5px;
     width: 90%;
-    height: 80%;
+    height: 90%;
     background: #1e1e1e;
     border-radius: 10px;
     box-shadow: 0 0 20px #00ffe0;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
   }
 
   .messages {
-    flex: 1;
-    overflow-y: auto;
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+    padding-left: 15px;
+    overflow-x: hidden;
   }
 
   .message {
+    min-width: 0;
+    max-width: 85%;
+    word-break: break-word;
+    white-space: pre-wrap;
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;

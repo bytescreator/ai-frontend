@@ -47,7 +47,6 @@ html {
   position: relative;
   /* Çizgiyi yazının altında konumlandırabilmek için */
   animation: moveLine 2s infinite;
-
 }
 
 .astra-title::after {
@@ -63,12 +62,15 @@ html {
   /* Çizginin yüksekliği */
   background: #00ffe0;
   /* Sol taraf parlak, sağ taraf soluk */
-  animation: slide 2s infinite, glowEffect 1.5s infinite alternate;
+  animation:
+    slide 2s infinite,
+    glowEffect 1.5s infinite alternate;
   /* Çizginin hareket süresi */
-  box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+  box-shadow:
+    0 0 10px #00ffe0,
+    0 0 20px #00ffe0;
   /* Kuyruklu yıldız etkisi için parlama */
 }
-
 
 @keyframes slide {
   0% {
@@ -86,11 +88,15 @@ html {
 
 @keyframes glowEffect {
   0% {
-    box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+    box-shadow:
+      0 0 10px #00ffe0,
+      0 0 20px #00ffe0;
   }
 
   100% {
-    box-shadow: 0 0 20px #00d1b8, 0 0 40px #00d1b8;
+    box-shadow:
+      0 0 20px #00d1b8,
+      0 0 40px #00d1b8;
   }
 }
 
