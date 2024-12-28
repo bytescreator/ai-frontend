@@ -11,6 +11,7 @@ const loadURL = serve({ directory: "build", file: "app" });
 
 function createWindow() {
   const win = new BrowserWindow({
+    title: "A.S.T.R.A",
     minWidth: 500,
     minHeight: 500,
     resizable: true,
