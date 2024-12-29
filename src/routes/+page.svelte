@@ -80,9 +80,9 @@
     <div class="assistant-container">
       <div class="messages">
         {#each messages as message}
-          <p class="message {message.sender}">
-            {message.text}
-          </p>
+          <div class="message {message.sender}">
+            {@html message.text}
+          </div>
         {/each}
       </div>
       <div class="input-container">
@@ -154,6 +154,7 @@
   }
 
   .message {
+    list-style-position: inside;
     min-width: 0;
     max-width: 600px;
     word-break: break-word;
