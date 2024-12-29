@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import AstraLoading from "./AstraLoading.svelte";
+  import SoundDeviceSelector from "./SoundDeviceSelector.svelte";
 
   let showAstra = true; // Başlangıçta A.S.T.R.A. animasyonu görünsün
   let messages: { sender: "assistant" | "user"; text: string }[] = []; // Mesajları saklamak için
   let userInput = ""; // Kullanıcı girdisi
+  let soundSelector;
 
   onMount(() => {
     window.astra.readyPromise.then(() => {
@@ -75,6 +77,7 @@
 </script>
 
 <div class="container">
+  <SoundDeviceSelector bind:this={soundSelector}></SoundDeviceSelector>
   {#if showAstra}
     <AstraLoading />
   {:else}
@@ -100,7 +103,11 @@
           <img src="/send.png" alt="Gönder" />
         </button>
 
-        <button class="microphone-button" on:click={startVoiceInput}>
+        <button
+          class="microphone-button"
+          on:click={startVoiceInput}
+          on:contextmenu={soundSelector.toggle}
+        >
           <img src="/microphone.png" alt="Mikrofon" width="40" height="40" />
         </button>
       </div>

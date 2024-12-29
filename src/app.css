@@ -212,19 +212,19 @@ button:hover {
 }
 
 /* Webkit tabanlı tarayıcılar (Chrome, Safari, Edge) için scroll bar özelleştirme */
-.assistant-container .messages::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
   /* Scroll bar'ın genişliği */
 }
 
-.assistant-container .messages::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #1e1e1e;
   /* Scroll bar'ın arka plan rengi */
   border-radius: 5px;
   /* Köşeleri yuvarlat */
 }
 
-.assistant-container .messages::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: #00ffe0;
   /* Scroll bar'ın rengi */
   border-radius: 5px;
@@ -233,7 +233,7 @@ button:hover {
   /* Scroll bar'ın etrafına ince kenarlık */
 }
 
-.assistant-container .messages::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background-color: #00d1b8;
   /* Scroll bar üzerine gelindiğinde rengi değiştir */
 }
