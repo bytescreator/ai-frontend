@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import AstraLoading from "./AstraLoading.svelte";
 
   let showAstra = true; // Başlangıçta A.S.T.R.A. animasyonu görünsün
   let messages: { sender: "assistant" | "user"; text: string }[] = []; // Mesajları saklamak için
@@ -75,7 +76,7 @@
 
 <div class="container">
   {#if showAstra}
-    <div class="astra-title">A.S.T.R.A.</div>
+    <AstraLoading />
   {:else}
     <div class="assistant-container">
       <div class="messages">
@@ -129,12 +130,6 @@
     color: #00ffe0;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
-  }
-
-  .astra-title {
-    font-size: 3rem;
-    color: #00ffe0;
-    text-shadow: 0 0 20px #00ffe0;
   }
 
   .assistant-container {
