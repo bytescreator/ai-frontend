@@ -6,6 +6,8 @@
   let showAstra = true; // Başlangıçta A.S.T.R.A. animasyonu görünsün
   let messages: { sender: "assistant" | "user"; text: string }[] = []; // Mesajları saklamak için
   let userInput = ""; // Kullanıcı girdisi
+  let textInputDisabled = false;
+  let nextVoiceActive = false;
   let soundSelector;
 
   onMount(() => {
@@ -17,19 +19,27 @@
       setTimeout(scrollToBottom, 0);
       messages = messages;
     });
+    window.astra.onTranscriptReady((text) => {
+      userInput = text;
+      textInputDisabled = false;
+      nextVoiceActive = true;
+    });
   });
 
-  function sendMessage() {
+  function sendMessage(speak: boolean) {
+    nextVoiceActive = false;
     if (userInput.trim()) {
       messages = [...messages, { sender: "user", text: userInput }];
-      window.astra.submitText(userInput);
+      window.astra.submitText(userInput, speak);
       userInput = "";
       setTimeout(scrollToBottom, 0);
     }
   }
 
   function startVoiceInput() {
-    alert("Sesli giriş başlatıldı!");
+    textInputDisabled = false;
+    nextVoiceActive = false;
+    window.astra.toggleVoice();
   }
 
   function scrollToBottom() {
@@ -94,16 +104,18 @@
           <img src="/pencil.png" alt="Yeniden Yaz" />
         </button>
         <input
+          disabled={textInputDisabled}
           type="text"
           bind:value={userInput}
           placeholder="Bir şey yazın..."
-          on:keydown={(e) => e.key === "Enter" && sendMessage()}
+          on:keydown={(e) => e.key === "Enter" && sendMessage(nextVoiceActive)}
         />
-        <button class="send-button" on:click={sendMessage}>
+        <button class="send-button" on:click={() => sendMessage(nextVoiceActive)}>
           <img src="/send.png" alt="Gönder" />
         </button>
 
         <button
+          disabled={textInputDisabled}
           class="microphone-button"
           on:click={startVoiceInput}
           on:contextmenu={soundSelector.toggle}

@@ -121,6 +121,6 @@
   }
 
   button.selected {
-    color: green;
+    color: rgb(209, 223, 220);
   }
 </style>

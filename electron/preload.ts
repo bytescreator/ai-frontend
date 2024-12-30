@@ -5,7 +5,8 @@ export const astra = {
    * sends given text to backend for llm inference
    * @param text to submit
    */
-  submitText: (text: string) => ipcRenderer.send("submit-text", text),
+  submitText: (text: string, speak: boolean = false) =>
+    ipcRenderer.send("submit-text", text, speak),
 
   /**
    * resets the chat session, all messages must be cleared
@@ -24,7 +25,7 @@ export const astra = {
   /**
    * submits a listening request to backend
    */
-  toggleVoice: (status: boolean) => ipcRenderer.send("toggle-listen", status),
+  toggleVoice: () => ipcRenderer.send("toggle-listen"),
 
   /**
    * requests sound device list from subprocess
@@ -78,8 +79,8 @@ export const astra = {
    * called when sound toggle responds
    * @param cb to be called when sound is toggled
    */
-  onVoiceToggle: (cb: (s: boolean) => void) => {
-    ipcRenderer.on("on-voice-toggle", (_, s) => {
+  onTranscriptReady: (cb: (transcript: string) => void) => {
+    ipcRenderer.on("transcript-ready", (_, s) => {
       cb(s);
     });
   },

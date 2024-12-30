@@ -25,8 +25,8 @@ export function bindCallbacks(win: Electron.BrowserWindow) {
     process.stderr.write(v);
   });
 
-  ipcMain.on("submit-text", (_, text) => {
-    serializer.write({ action: "submit-text", text });
+  ipcMain.on("submit-text", (_, text, speak) => {
+    serializer.write({ action: "submit-text", text, speak });
   });
   ipcMain.on("new-session", () => {
     serializer.write({ action: "new-session" });
@@ -54,6 +54,8 @@ export function bindCallbacks(win: Electron.BrowserWindow) {
         win.webContents.send("input-ready");
       case "on-llm-response":
         win.webContents.send("on-llm-response", obj.text);
+      case "transcript-ready":
+        win.webContents.send("transcript-ready", obj.transcript);
       case "on-sound-input":
         win.webContents.send("on-sound-input", obj.text);
       case "on-voice-toggle":
