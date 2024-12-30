@@ -20,6 +20,7 @@
       messages = messages;
     });
     window.astra.onTranscriptReady((text) => {
+      if (!text) return;
       userInput = text;
       textInputDisabled = false;
       nextVoiceActive = true;
@@ -38,7 +39,6 @@
 
   function startVoiceInput() {
     textInputDisabled = false;
-    nextVoiceActive = false;
     window.astra.toggleVoice();
   }
 
