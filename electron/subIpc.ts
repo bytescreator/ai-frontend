@@ -3,7 +3,7 @@ import nd from "ndjson";
 import { spawn } from "node:child_process";
 
 export function bindCallbacks(win: Electron.BrowserWindow) {
-  const handle = spawn("python.exe", ["main.py"], { cwd: "./backend" });
+  const handle = spawn("python.exe", ["main.py"], { cwd: "./backend", serialization: "advanced" });
   handle.on("error", (e) => {
     dialog.showErrorBox("alt islem baslatilamadi", `alt islem baslatilamadi: ${e}`);
     app.quit();
